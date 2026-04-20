@@ -1,5 +1,6 @@
 add_library(LibraryDB STATIC
-    # databasemanager.cpp
+    databasemanager.h
+    databasemanager.cpp
     # databaseworker.cpp
 )
 target_link_libraries(LibraryDB PRIVATE Qt6::Sql Qt6::Core)

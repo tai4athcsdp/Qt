@@ -33,8 +33,19 @@ For better readability, separate these different parts with an empty line
 			VERSION: 1.0
 		) =====> tên module = URI + VERSION
 ===============================C++ Knowledge==========================================================================
-
-
+1. Tại sao nên dùng enum class hơn là enum thường? 
+2. Tại sao khi truyền enum nên truyên pass by value??? 
+	- enum có đặc tính copy cực nhanh như kiểu dữ liệu nguyên thủy (int, bool...)	- 
+	-
+3. Cơ chế implitcit sharing
+	- Thông thường trong C++, khi bạn gán một danh sách cho một danh sách khác (listA = listB), 
+	máy tính sẽ phải thực hiện một vòng lặp để sao chép từng phần tử từ vùng nhớ này sang vùng nhớ khác.
+ 	Việc này rất tốn tài nguyên nếu danh sách có hàng ngàn cuốn sách.
+	- Với Implicit Sharing, Qt sẽ "ăn gian" bằng cách:
+		Khi Gán: Qt không sao chép dữ liệu. Thay vào đó, cả hai đối tượng listA và listB sẽ cùng trỏ chung vào một vùng nhớ dữ liệu duy nhất.
+		Khi Đọc: Cả hai đối tượng dùng chung dữ liệu một cách vui vẻ.
+		Khi Ghi (Thay đổi): Chỉ khi một trong hai đối tượng muốn chỉnh sửa dữ liệu (ví dụ thêm 1 cuốn sách vào listA), 
+			Qt mới thực hiện việc sao chép dữ liệu ra một vùng nhớ mới cho đối tượng đó.
 
 
 

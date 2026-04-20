@@ -9,8 +9,12 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
+set(QT_QML_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/qt/qml")
+set(QT_QML_GENERATE_QMLLS_INI ON)
+
 # 1. Tìm Qt
 find_package(Qt6 REQUIRED COMPONENTS Core Quick Sql)
+qt_policy(SET QTP0004 NEW)
 
 # 2. Tải Google Test (GTest)
 include(FetchContent)
@@ -34,16 +38,24 @@ add_executable(${MAIN_APP_EXE}
 qt_add_qml_module(${MAIN_APP_EXE}
     URI LibraryApp
     VERSION 1.0
-    RESOURCE_PREFIX "/qt/qml"
+    RESOURCE_PREFIX /qt/qml
     QML_FILES
         qml/Main.qml
-        QML_FILES qml/AllBookScreen.qml qml/AppIndicator.qml qml/CustomLabel.qml qml/MultiPageTable.qml qml/TextButton.qml
+        qml/AllBookScreen.qml qml/AppIndicator.qml qml/CustomLabel.qml qml/MultiPageTable.qml qml/TextButton.qml
+        qml/SideBar.qml
+    RESOURCES
+        assets/icons/ic_home.svg
+        assets/icons/ic_settings.svg
+        assets/icons/ic_book.svg
+        assets/images/app_bkg.png
+        assets/images/app_bkg2.png
 )
 
 # 5. Thêm các lớp logic (Tạm thời gom vào đây hoặc dùng subdirectories)
 add_subdirectory(src/database)
 add_subdirectory(src/logic)
 add_subdirectory(src/models)
+add_subdirectory(src/controllers)
 
 # 6. Bật Unit Test
 enable_testing()
@@ -55,6 +67,8 @@ target_link_libraries(${MAIN_APP_EXE} PRIVATE
     Qt6::Quick
     Qt6::Sql
     LibraryDB
-    LibraryLogic
+    LibraryLogicplugin
     LibraryModels
+    ControllerLibplugin
+
 )
