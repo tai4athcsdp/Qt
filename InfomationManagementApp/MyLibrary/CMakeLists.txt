@@ -48,7 +48,6 @@ qt_add_qml_module(${MAIN_APP_EXE}
         assets/icons/ic_settings.svg
         assets/icons/ic_book.svg
         assets/images/app_bkg.png
-        assets/images/app_bkg2.png
 )
 
 # 5. Thêm các lớp logic (Tạm thời gom vào đây hoặc dùng subdirectories)

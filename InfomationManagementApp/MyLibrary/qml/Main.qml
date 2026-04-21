@@ -16,7 +16,7 @@ Window {
 
         anchors.fill: parent
         fillMode: Image.PreserveAspectFit
-        source: Qt.resolvedUrl("qrc:/qt/qml/LibraryApp/assets/images/app_bkg2.png")
+        source: Qt.resolvedUrl("qrc:/qt/qml/LibraryApp/assets/images/app_bkg.png")
     }
     SideBar {
         id: sideBar

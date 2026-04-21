@@ -2,7 +2,7 @@
 #define BOOKMANAGER_H
 
 #include <QObject>
-#include <QtQml/qqmlengine.h>
+#include <QQmlEngine>
 
 #include "bookmodel.h"
 

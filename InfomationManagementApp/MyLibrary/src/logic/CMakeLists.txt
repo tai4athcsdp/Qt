@@ -1,5 +1,5 @@
-qt_add_library(LibraryLogic STATIC)
 qt_add_qml_module(LibraryLogic
+    STATIC
     URI Logic
     VERSION 1.0
     RESOURCE_PREFIX /qt/qml

@@ -3,7 +3,7 @@
 
 #include <QAbstractListModel>
 #include <QObject>
-#include <QtQml/QQmlEngine>
+#include <QQmlEngine>
 
 struct Book {
     int id;

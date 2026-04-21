@@ -1,6 +1,6 @@
 
-qt_add_library(ControllerLib STATIC)
 qt_add_qml_module(ControllerLib
+    STATIC
     URI Controller
     VERSION 1.0
     RESOURCE_PREFIX /qt/qml

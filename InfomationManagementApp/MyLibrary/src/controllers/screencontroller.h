@@ -2,8 +2,7 @@
 #define SCREENCONTROLLER_H
 
 #include <QObject>
-#include <QtQml/qqmlengine.h>
-#include <QtQml/QJSEngine>
+#include <QQmlEngine>
 
 
 
