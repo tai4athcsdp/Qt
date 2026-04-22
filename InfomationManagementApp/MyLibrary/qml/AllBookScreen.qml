@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
-import Logic 1.0 as Logic
+import Logic
 
 Rectangle {
     id: root
@@ -69,7 +69,7 @@ Rectangle {
 
                 clip: true
                 headerPositioning: ListView.OverlayHeader
-                model: Logic.BookManager.bookModel
+                model: BookManager.bookModel
                 spacing: 0
 
                 delegate: Rectangle {

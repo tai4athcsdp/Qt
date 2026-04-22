@@ -1,5 +1,5 @@
 import QtQuick
-import Controller as Controller
+import Controller
 
 Window {
     id: root
@@ -27,13 +27,13 @@ Window {
 
         function getSource(): url {
             let url = Qt.resolvedUrl("");
-            switch (Controller.ScreenController.currentScreen) {
-            case (Controller.ScreenController.ScreenId.Home):
+            switch (ScreenController.currentScreen) {
+            case (ScreenController.ScreenId.Home):
                 break;
-            case (Controller.ScreenController.ScreenId.AllBook):
+            case (ScreenController.ScreenId.AllBook):
                 url = Qt.resolvedUrl("qrc:/qt/qml/LibraryApp/qml/AllBookScreen.qml");
                 break;
-            case (Controller.ScreenController.ScreenId.Setting):
+            case (ScreenController.ScreenId.Setting):
                 break;
             }
             return url;

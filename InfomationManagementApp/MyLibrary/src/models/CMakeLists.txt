@@ -2,7 +2,6 @@ qt_add_qml_module(LibraryModels
     STATIC
     URI Models
     VERSION 1.0
-    RESOURCE_PREFIX /qt/qml
     SOURCES
         bookmodel.h
         bookmodel.cpp
