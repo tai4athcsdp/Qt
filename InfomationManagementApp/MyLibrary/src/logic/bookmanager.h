@@ -13,6 +13,7 @@ class BookManager : public QObject
     QML_ELEMENT
     QML_SINGLETON
     Q_PROPERTY(BookModel* bookModel READ bookModel CONSTANT FINAL)
+    Q_PROPERTY(bool isLoading READ isLoading NOTIFY isLoadingChanged FINAL)
 public:
     static BookManager* instance();
     static BookManager* create(QQmlEngine* engine, QJSEngine* scriptEngine);
@@ -20,7 +21,12 @@ public:
     Q_INVOKABLE void fetchAllBooks();
 
     BookModel *bookModel() const;
+    bool isLoading() const;
+    void setIsLoading(bool newIsLoading);
+
 signals:
+    void isLoadingChanged();
+
 private:
     explicit BookManager(QObject *parent = nullptr);
     ~BookManager() = default;
@@ -30,6 +36,7 @@ private:
     BookManager& operator=(BookManager&&) = delete;
 private:
     BookModel *mBookModel {nullptr};
+    bool mIsLoading {false};
 };
 
 #endif // BOOKMANAGER_H

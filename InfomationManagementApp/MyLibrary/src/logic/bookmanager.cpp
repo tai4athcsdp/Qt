@@ -1,15 +1,14 @@
 #include "bookmanager.h"
 
+#include <QtConcurrent/QtConcurrent>
+
+#include "bookrepository.h"
+
+
 BookManager::BookManager(QObject *parent)
-    : QObject{parent}
+    : QObject{parent}, mBookModel {new BookModel(this)}
 {
 
-    mBookModel = new BookModel(this);
-    QList<Book> listBook;
-    listBook.append(Book{0, "Tôi thấy hoa vàng trên cỏ xanh", "Nguyễn Nhật Ánh"});
-    listBook.append(Book{0, "Truyện Kiều", "Nguyễn Du"});
-    listBook.append(Book{0, "Cây Bàng Lá Đỏ", "Lê Văn Ba"});
-    mBookModel->updateBooks(listBook);
 }
 
 BookManager *BookManager::instance()
@@ -27,10 +26,39 @@ BookManager *BookManager::create(QQmlEngine *engine, QJSEngine *scriptEngine)
 
 void BookManager::fetchAllBooks()
 {
+    qDebug() << "qqqq " << __PRETTY_FUNCTION__;
+    if (mIsLoading) return;
+    setIsLoading(true);
+    // Sử dụng QtConcurrent::run để chạy việc lấy dữ liệu ở luồng phụ
+    // Tránh làm treo giao diện chính (Main Thread)
+    QtConcurrent::run([this]() {
+        // 1. Khởi tạo Repository để làm việc với DB
+        BookRepository repo;
 
+        // 2. Thực thi lấy dữ liệu
+        QList<Book> results = repo.findAll();
+
+        // 3. Đẩy kết quả về luồng chính để cập nhật UI an toàn
+        QMetaObject::invokeMethod(this, [this, results]() {
+            mBookModel->updateBooks(results); // Giả định Model của bạn có hàm setBooks
+            setIsLoading(false);
+        }, Qt::QueuedConnection);
+    });
 }
 
 BookModel *BookManager::bookModel() const
 {
     return mBookModel;
+}
+
+bool BookManager::isLoading() const
+{
+    return mIsLoading;
+}
+
+void BookManager::setIsLoading(bool newIsLoading)
+{
+    if (mIsLoading == newIsLoading) return;
+    mIsLoading = newIsLoading;
+    emit isLoadingChanged();
 }

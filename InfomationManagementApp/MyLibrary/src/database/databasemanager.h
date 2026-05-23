@@ -8,11 +8,16 @@ class DatabaseManager : public QObject
 {
     Q_OBJECT
 public:
-    explicit DatabaseManager(QObject *parent = nullptr);
-    bool openDatabase(const QString& dbName);
-signals:
+    static void init(const QString& hostName, const int port, const QString& dbName, const QString& userName, const QString& passWord);
+    static QSqlDatabase getConnectionForCurrentThread();
+    static void closeConnectionForCurrentThread();
+
 private:
-    QSqlDatabase mDb;
+    static QString mHostName;
+    static int mPort;
+    static QString mDBName;
+    static QString mUserName;
+    static QString mPassWord;
 };
 
 #endif // DATABASEMANAGER_H

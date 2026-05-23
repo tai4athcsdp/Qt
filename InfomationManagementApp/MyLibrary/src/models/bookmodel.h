@@ -5,11 +5,7 @@
 #include <QObject>
 #include <QQmlEngine>
 
-struct Book {
-    int id;
-    QString title {""};
-    QString author {""};
-};
+#include "book.h"
 
 class BookModel : public QAbstractListModel
 {

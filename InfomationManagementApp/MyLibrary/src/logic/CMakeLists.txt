@@ -5,7 +5,5 @@ qt_add_qml_module(LibraryLogic
     SOURCES
         bookmanager.h
         bookmanager.cpp
-    DEPENDENCIES
-        Models
 )
-target_link_libraries(LibraryLogic PRIVATE Qt6::Core Qt6::Qml LibraryModels)
+target_link_libraries(LibraryLogic PRIVATE Qt6::Core Qt6::Qml PUBLIC LibraryModels LibraryDB)

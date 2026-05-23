@@ -8,11 +8,7 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
     QQmlApplicationEngine engine;
 
-    DatabaseManager testDb;
-    if (testDb.openDatabase("bookstore"))
-    {
-    } else {
-    }
+    DatabaseManager::init("localhost", 5432, "bookstore", "postgres", "1");
 
     QObject::connect(
         &engine,

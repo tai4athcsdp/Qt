@@ -8,6 +8,10 @@ Rectangle {
     anchors.fill: parent
     color: Qt.color("#f6f8f9")
 
+    Component.onCompleted: {
+        BookManager.fetchAllBooks();
+    }
+
     ColumnLayout {
         id: screenLayout
 

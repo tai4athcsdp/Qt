@@ -52,6 +52,7 @@ add_subdirectory(src/database)
 add_subdirectory(src/logic)
 add_subdirectory(src/models)
 add_subdirectory(src/controllers)
+add_subdirectory(src/common)
 
 # 6. Bật Unit Test
 enable_testing()
@@ -66,5 +67,6 @@ target_link_libraries(${MAIN_APP_EXE} PRIVATE
     LibraryLogicplugin
     LibraryModelsplugin
     ControllerLibplugin
+    CommonLibplugin
 
 )

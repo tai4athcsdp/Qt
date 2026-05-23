@@ -7,5 +7,5 @@ qt_add_qml_module(LibraryModels
         bookmodel.cpp
 )
 
-target_link_libraries(LibraryModels PRIVATE Qt6::Core Qt6::Quick)
+target_link_libraries(LibraryModels PRIVATE Qt6::Core Qt6::Quick  PUBLIC CommonLib)
 target_include_directories(LibraryModels PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
