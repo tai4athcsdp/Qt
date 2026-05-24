@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.16)
 project(LibrarySystem VERSION 1.0 LANGUAGES CXX)
 
 # 1. Tìm Qt
-find_package(Qt6 REQUIRED COMPONENTS Core Quick Sql)
+find_package(Qt6 REQUIRED COMPONENTS Core Quick Sql QuickControls2)
 
 qt_standard_project_setup(REQUIRES 6.5)
 
@@ -40,11 +40,12 @@ qt_add_qml_module(${MAIN_APP_EXE}
         qml/Main.qml
         qml/AllBookScreen.qml qml/AppIndicator.qml qml/CustomLabel.qml qml/MultiPageTable.qml qml/TextButton.qml
         qml/SideBar.qml
+        qml/TablePageNavigator.qml
     RESOURCES
         assets/icons/ic_home.svg
         assets/icons/ic_settings.svg
         assets/icons/ic_book.svg
-        assets/images/app_bkg.png
+        assets/images/app_bkg.png 
 )
 
 # 5. Thêm các lớp logic (Tạm thời gom vào đây hoặc dùng subdirectories)
@@ -63,6 +64,7 @@ target_link_libraries(${MAIN_APP_EXE} PRIVATE
     Qt6::Core
     Qt6::Quick
     Qt6::Sql
+    Qt6::QuickControls2
     LibraryDB
     LibraryLogicplugin
     LibraryModelsplugin

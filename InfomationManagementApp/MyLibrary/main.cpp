@@ -1,11 +1,13 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQuickStyle>
 
 #include "databasemanager.h"
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
+    QQuickStyle::setStyle("Basic");
     QQmlApplicationEngine engine;
 
     DatabaseManager::init("localhost", 5432, "bookstore", "postgres", "1");

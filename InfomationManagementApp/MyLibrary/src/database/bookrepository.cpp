@@ -18,6 +18,7 @@ QList<Book> BookRepository::findAll()
 
         // 2. Thực thi SQL
         QSqlQuery query(db);
+        query.prepare("SELECT * FROM book");
 
         if (query.exec()) {
             while (query.next()) {
@@ -32,7 +33,7 @@ QList<Book> BookRepository::findAll()
 }
 
 Book BookRepository::mapToBook(const QSqlQuery &query)
-{
+{    
     Book item;
     item.id = query.value("id").toInt();
     item.title = query.value("name").toString();

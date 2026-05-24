@@ -81,12 +81,13 @@ Rectangle {
 
                     required property string author
                     required property int bookId
+                    readonly property int numberItemPerPage: 10
                     required property string title
 
                     color: Qt.color("transparent")
-                    height: 50
+                    height: (ListView.view.height - ListView.view.headerItem.height) / numberItemPerPage
                     opacity: 0.5
-                    width: parent.width
+                    width: ListView.view.width
 
                     border {
                         color: "red"
@@ -164,12 +165,17 @@ Rectangle {
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.preferredHeight: 0.1
-            color: "red"
-            opacity: 0.5
+            color: "transparent"
+            radius: 10
 
             border {
                 color: "green"
                 width: 1
+            }
+            TablePageNavigator {
+                anchors.centerIn: parent
+                height: parent.height * 3 / 4
+                width: parent.width / 4
             }
         }
     }

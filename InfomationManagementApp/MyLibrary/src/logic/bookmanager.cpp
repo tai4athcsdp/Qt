@@ -26,7 +26,6 @@ BookManager *BookManager::create(QQmlEngine *engine, QJSEngine *scriptEngine)
 
 void BookManager::fetchAllBooks()
 {
-    qDebug() << "qqqq " << __PRETTY_FUNCTION__;
     if (mIsLoading) return;
     setIsLoading(true);
     // Sử dụng QtConcurrent::run để chạy việc lấy dữ liệu ở luồng phụ
