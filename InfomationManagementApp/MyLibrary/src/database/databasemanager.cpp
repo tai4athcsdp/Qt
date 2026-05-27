@@ -43,5 +43,6 @@ void DatabaseManager::closeConnectionForCurrentThread()
     QString connName = QString("Conn_Thread_%1").arg(quintptr(QThread::currentThreadId()));
     if (QSqlDatabase::contains(connName)) {
         QSqlDatabase::database(connName).close();
+        QSqlDatabase::removeDatabase(connName);
     }
 }
