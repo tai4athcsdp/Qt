@@ -38,7 +38,7 @@ qt_add_qml_module(${MAIN_APP_EXE}
     VERSION 1.0
     QML_FILES
         qml/Main.qml
-        qml/AllBookScreen.qml qml/AppIndicator.qml qml/CustomLabel.qml qml/MultiPageTable.qml qml/TextButton.qml
+        qml/AllBookScreen.qml qml/CustomLabel.qml qml/MultiPageTable.qml qml/TextButton.qml
         qml/SideBar.qml
         qml/TablePageNavigator.qml
     RESOURCES

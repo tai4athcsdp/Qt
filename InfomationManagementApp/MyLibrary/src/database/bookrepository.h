@@ -12,7 +12,8 @@ class BookRepository : public QObject
 public:
     explicit BookRepository(QObject *parent = nullptr);
 
-    QList<Book> findAll();
+    QList<Book> findAll(int pageNumber, int pageSize = 10);
+    unsigned int countAll();
     Book mapToBook(const QSqlQuery& query);
 
 signals:

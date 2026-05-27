@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Controls
 import Logic
 
 Rectangle {
@@ -7,10 +8,6 @@ Rectangle {
 
     anchors.fill: parent
     color: Qt.color("#f6f8f9")
-
-    Component.onCompleted: {
-        BookManager.fetchAllBooks();
-    }
 
     ColumnLayout {
         id: screenLayout
@@ -171,6 +168,17 @@ Rectangle {
             border {
                 color: "green"
                 width: 1
+            }
+            Label {
+                id: totalBook
+
+                anchors.verticalCenter: parent.verticalCenter
+                text: qsTr("Tổng số: ") + BookManager.totalBooks
+
+                font {
+                    bold: true
+                    pixelSize: 17
+                }
             }
             TablePageNavigator {
                 anchors.centerIn: parent

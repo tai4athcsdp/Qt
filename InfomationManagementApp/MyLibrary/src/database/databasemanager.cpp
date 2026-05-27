@@ -20,7 +20,6 @@ void DatabaseManager::init(const QString &hostName, const int port, const QStrin
 QSqlDatabase DatabaseManager::getConnectionForCurrentThread()
 {
     QString connName = QString("Conn_Thread_%1").arg(quintptr(QThread::currentThreadId()));
-
     if (QSqlDatabase::contains(connName)) {
         return QSqlDatabase::database(connName);
     }
@@ -44,6 +43,5 @@ void DatabaseManager::closeConnectionForCurrentThread()
     QString connName = QString("Conn_Thread_%1").arg(quintptr(QThread::currentThreadId()));
     if (QSqlDatabase::contains(connName)) {
         QSqlDatabase::database(connName).close();
-        QSqlDatabase::removeDatabase(connName);
     }
 }
