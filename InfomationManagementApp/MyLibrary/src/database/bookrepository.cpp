@@ -2,47 +2,51 @@
 #include "databasemanager.h"
 
 #include <QSqlError>
+#include <QThread>
 
-BookRepository::BookRepository(QObject *parent)
-    : QObject{parent}
+BookRepository::BookRepository()
 {}
 
 QList<Book> BookRepository::findAll(int pageNumber, int pageSize)
-{    
+{    qDebug() << __PRETTY_FUNCTION__ << QThread::currentThreadId();
     // Tính toán vị trí bắt đầu bốc dữ liệu từ Postgres
     int offset = (pageNumber - 1) * pageSize;
 
     QList<Book> books;
 
     {
+        qDebug() << __PRETTY_FUNCTION__ << " get database connection";
         QSqlDatabase db = DatabaseManager::getConnectionForCurrentThread();
 
-        if (!db.isOpen()) return books;
-
-        // 2. Thực thi SQL
-        QSqlQuery query(db);
-        // Sử dụng LIMIT và OFFSET để bốc trúng phân đoạn dữ liệu
-        query.prepare("SELECT * FROM book ORDER BY id ASC LIMIT :limit OFFSET :offset");
-        query.bindValue(":limit", pageSize);
-        query.bindValue(":offset", offset);
-
-        if (!query.exec()) {
-            qDebug() << "Postgres Query Error:" << query.lastError().text();
-            return books;
-        }
-
-        while (query.next()) {
-            books.append(mapToBook(query));
+        if (!db.isOpen()) {
+            qDebug() << __PRETTY_FUNCTION__ << " cannot open db " << db.databaseName();
+        } else {
+            qDebug() << __PRETTY_FUNCTION__ << "start query data";
+            // 2. Thực thi SQL
+            QSqlQuery query(db);
+            // Sử dụng LIMIT và OFFSET để bốc trúng phân đoạn dữ liệu
+            query.prepare("SELECT * FROM book ORDER BY id ASC LIMIT :limit OFFSET :offset");
+            query.bindValue(":limit", pageSize);
+            query.bindValue(":offset", offset);
+            if (!query.exec()) {
+                qDebug() << __PRETTY_FUNCTION__ <<  "Postgres Query Error:" << query.lastError().text();
+            }
+            else {
+                qDebug() << __PRETTY_FUNCTION__ << " loop to get data";
+                while (query.next()) {
+                    books.append(mapToBook(query));
+                }
+            }
         }
     }
-
-    // 3. Giải phóng kết nối của luồng
+    qDebug() << __PRETTY_FUNCTION__ << " close database connection";
     DatabaseManager::closeConnectionForCurrentThread();
     return books;
 }
 
 unsigned int BookRepository::countAll()
 {
+    qDebug() << __PRETTY_FUNCTION__ << QThread::currentThreadId();
     unsigned int totalBooks = 0;
 
     {

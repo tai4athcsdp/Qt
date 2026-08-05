@@ -181,9 +181,15 @@ Rectangle {
                 }
             }
             TablePageNavigator {
+                id: tablePageNavi
+
                 anchors.centerIn: parent
+                currentPage: BookManager.currentPage
                 height: parent.height * 3 / 4
                 width: parent.width / 4
+
+                onAfterBtnClicked: BookManager.currentPage++
+                onPrevBtnClicked: BookManager.currentPage--
             }
         }
     }

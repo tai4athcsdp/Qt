@@ -41,6 +41,7 @@ QHash<int, QByteArray> BookModel::roleNames() const
 
 void BookModel::updateBooks(const QList<Book> &newBooks)
 {
+    qDebug() << __PRETTY_FUNCTION__ << "newBooks.count: " << newBooks.count();
     beginResetModel();
     mListBook = newBooks;
     endResetModel();

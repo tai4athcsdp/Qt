@@ -12,7 +12,7 @@ class BookManager : public QObject
     Q_OBJECT
     QML_ELEMENT
     QML_SINGLETON
-    Q_PROPERTY(int currentPage READ currentPage NOTIFY currentPageChanged)
+    Q_PROPERTY(int currentPage READ currentPage WRITE setCurrentPage NOTIFY currentPageChanged)
     Q_PROPERTY(int totalBooks READ totalBooks NOTIFY totalBooksChanged)
     Q_PROPERTY(BookModel* bookModel READ bookModel CONSTANT FINAL)
     Q_PROPERTY(bool isLoading READ isLoading NOTIFY isLoadingChanged FINAL)
@@ -31,10 +31,12 @@ public:
 
     int totalBooks() const;
 
+    void setCurrentPage(int newCurrentPage);
+
 signals:
     void isLoadingChanged();
 
-    void currentPageChanged();
+    void currentPageChanged(int currentPage);
 
     void totalBooksChanged();
 

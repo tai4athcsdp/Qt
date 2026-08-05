@@ -6,8 +6,11 @@ import QtQuick.Controls
 RowLayout {
     id: root
 
-    property int currentPage: 1
+    required property int currentPage
     property int totalPage: 10
+
+    signal afterBtnClicked
+    signal prevBtnClicked
 
     spacing: 10
 
@@ -18,7 +21,7 @@ RowLayout {
         Layout.preferredWidth: height
         text: "Trước"
 
-        onClicked: {}
+        onClicked: root.prevBtnClicked()
 
         font {
             bold: true
@@ -52,7 +55,7 @@ RowLayout {
         Layout.preferredWidth: height
         text: "Sau"
 
-        onClicked: {}
+        onClicked: root.afterBtnClicked()
 
         font {
             bold: true

@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQuickStyle>
+#include <QThread>
 
 #include "databasemanager.h"
 
@@ -20,5 +21,6 @@ int main(int argc, char *argv[])
         Qt::QueuedConnection);
     engine.loadFromModule("LibraryApp", "Main");
 
+    qDebug() << "MainThread id : " <<QThread::currentThreadId();
     return app.exec();
 }

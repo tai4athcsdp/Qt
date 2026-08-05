@@ -1,19 +1,24 @@
 #include "screencontroller.h"
 
+static ScreenController* mInst = nullptr;
+
 ScreenController *ScreenController::instance()
 {
-    static ScreenController inst;
-    return &inst;
+    if (!mInst) {
+        mInst = new ScreenController();
+    }
+    return mInst;
 }
 
 ScreenController *ScreenController::create(QQmlEngine *engine, QJSEngine *scriptEngine)
-{
+{    
     Q_UNUSED(engine)
     Q_UNUSED(scriptEngine)
     return instance();
 }
 
 ScreenController::ScreenController(QObject *parent)
+    : QObject(parent)
 {
 
 }
