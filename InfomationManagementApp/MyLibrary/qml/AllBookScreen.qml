@@ -186,6 +186,7 @@ Rectangle {
                 anchors.centerIn: parent
                 currentPage: BookManager.currentPage
                 height: parent.height * 3 / 4
+                totalPage: (BookManager.totalBooks + 10 - 1) / 10
                 width: parent.width / 4
 
                 onAfterBtnClicked: BookManager.currentPage++

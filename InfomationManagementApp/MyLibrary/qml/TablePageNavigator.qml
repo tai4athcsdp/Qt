@@ -7,7 +7,7 @@ RowLayout {
     id: root
 
     required property int currentPage
-    property int totalPage: 10
+    required property int totalPage
 
     signal afterBtnClicked
     signal prevBtnClicked

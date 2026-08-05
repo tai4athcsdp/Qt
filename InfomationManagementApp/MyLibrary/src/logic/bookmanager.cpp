@@ -111,8 +111,16 @@ int BookManager::totalBooks() const
 
 void BookManager::setCurrentPage(int newCurrentPage)
 {
-    if (mCurrentPage == newCurrentPage)
-        return;
-    mCurrentPage = newCurrentPage;
-    emit currentPageChanged(newCurrentPage);
+    qDebug() << __PRETTY_FUNCTION__ << " newCurrentPage: " << newCurrentPage;
+    int numOfPage = ((mTotalBooks + 10 - 1) / 10);
+    qDebug() << __PRETTY_FUNCTION__ << " numOfPage: " << numOfPage;
+    if (newCurrentPage <= 0 || newCurrentPage > numOfPage)
+    {
+        qDebug() << __PRETTY_FUNCTION__ << " cannot set current page!!!!";
+    } else if (mCurrentPage == newCurrentPage) {
+        qDebug() << __PRETTY_FUNCTION__ << " mCurrentPage == newCurrentPage!!";
+    } else {
+        mCurrentPage = newCurrentPage;
+        emit currentPageChanged(newCurrentPage);
+    }
 }
