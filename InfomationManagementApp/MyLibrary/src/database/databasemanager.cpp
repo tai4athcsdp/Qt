@@ -52,7 +52,10 @@ void DatabaseManager::closeConnectionForCurrentThread()
 {
     qDebug() << __PRETTY_FUNCTION__ << "currentThreadId:" << QThread::currentThreadId();
     QString connName = QString("Conn_Thread_%1").arg(quintptr(QThread::currentThreadId()));
+    qDebug() << __PRETTY_FUNCTION__ << " connName: " << connName;
     if (QSqlDatabase::contains(connName)) {
+        qDebug() << __PRETTY_FUNCTION__ << " close and remove database, connName: " << connName;
         QSqlDatabase::database(connName).close();
+        QSqlDatabase::removeDatabase(connName);
     }
 }
